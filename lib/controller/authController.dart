@@ -7,9 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/Login.dart';
 
 class AuthController extends GetxController {
-  static AuthController instance = Get.find(); // Access controller anywhere
+  static AuthController instance = Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  RxBool isPasswordVisible = false.obs; // Password visibility
+  RxBool isPasswordVisible = false.obs;
   RxBool rememberMe = false.obs;
 
   Rx<User?> firebaseUser = Rx<User?>(null);
@@ -32,12 +32,11 @@ class AuthController extends GetxController {
     }
   }
 
-  // Toggle remember me value
   void toggleRememberMe(bool value) {
     rememberMe.value = value;
   }
 
-  // Password Reset Function
+
   Future<void> resetPassword(String email) async {
     try {
 
@@ -95,7 +94,7 @@ class AuthController extends GetxController {
           password: password
       );
 
-      // Save user data including name
+
       await saveUserData(email, fullName);
 
       Get.snackbar(
@@ -125,10 +124,9 @@ class AuthController extends GetxController {
           password: password
       );
 
-      // Fetch the user's name from SharedPreferences or use previously stored name
+
       String userName = await getUserNameByEmail(email);
 
-      // Save user state with name
       await saveUserLoginState(email, userName);
 
       Get.snackbar(
@@ -139,7 +137,7 @@ class AuthController extends GetxController {
           colorText: Colors.white
       );
 
-      Get.to(() => RestaurantHomePage()); // Navigate to Home using offAll
+      Get.to(() => RestaurantHomePage());
     } catch (e) {
       Get.snackbar(
           "Error",
@@ -151,28 +149,26 @@ class AuthController extends GetxController {
     }
   }
 
-  // Save user data to SharedPreferences (including name)
+
   Future<void> saveUserData(String email, String fullName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', true);
     await prefs.setString('userEmail', email);
     await prefs.setString('userName', fullName);
 
-    // Also save to email-based key for future logins
+
     await prefs.setString('userName_$email', fullName);
   }
 
-  // Get user's name by email
+
   Future<String> getUserNameByEmail(String email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Try to get the name specifically stored for this email
     String? name = prefs.getString('userName_$email');
 
-    // If no name is found for this email, return default
     return name ?? 'User';
   }
 
-  // Save user login state to SharedPreferences with name
+
   Future<void> saveUserLoginState(String email, String name) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', true);
@@ -180,13 +176,13 @@ class AuthController extends GetxController {
     await prefs.setString('userName', name);
   }
 
-  // Get user's name from SharedPreferences
+
   Future<String> getUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString('userEmail');
 
     if (email != null) {
-      // Try to get name by email-specific key first
+
       String? nameByEmail = prefs.getString('userName_$email');
       if (nameByEmail != null && nameByEmail.isNotEmpty) {
         // If found, update the current userName for consistency
@@ -195,27 +191,26 @@ class AuthController extends GetxController {
       }
     }
 
-    // Fall back to regular userName
+
     return prefs.getString('userName') ?? 'User';
   }
 
-  // Get user's email from SharedPreferences
+
   Future<String> getUserEmail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userEmail') ?? 'user@example.com';
   }
 
-  // Clear user login state
+
   Future<void> clearUserLoginState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
     await prefs.remove('userEmail');
     await prefs.remove('userName');
-    // Note: We're intentionally NOT removing the email-specific userName entries
-    // so they persist across logins
+
   }
 
-  // Logout User
+
   Future<void> signOut() async {
     await _auth.signOut();
     await clearUserLoginState();

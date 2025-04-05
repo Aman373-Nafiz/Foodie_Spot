@@ -58,7 +58,7 @@ class _RegistrationState extends State<Registration> {
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.078),
               child: Column(
                 children: [
-                  // Logo
+
                   Column(
                     children: [
                       const Icon(Icons.restaurant_menu,
@@ -138,7 +138,6 @@ class _RegistrationState extends State<Registration> {
 
                           const SizedBox(height: 10),
 
-                          // Email
                           CustomInputField(
                             controller: emailController,
                             label: "Email Address",
@@ -161,7 +160,7 @@ class _RegistrationState extends State<Registration> {
 
                           const SizedBox(height: 10),
 
-                          // Password with toggle
+
                           Obx(() {
                             return CustomInputField(
                               controller: passwordController,
@@ -197,7 +196,7 @@ class _RegistrationState extends State<Registration> {
 
                           const SizedBox(height: 10),
 
-                          // Phone Number
+
                           CustomInputField(
                             controller: phoneNumberController,
                             label: "Phone Number",
@@ -220,7 +219,7 @@ class _RegistrationState extends State<Registration> {
 
                           const SizedBox(height: 10),
 
-                          // Terms and Conditions
+
                           Row(
                             children: [
                               Checkbox(
@@ -261,7 +260,7 @@ class _RegistrationState extends State<Registration> {
 
                           const SizedBox(height: 10),
 
-                          // Create Account Button
+
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -305,7 +304,7 @@ class _RegistrationState extends State<Registration> {
 
                           const SizedBox(height: 10),
 
-                          // Already have an account? Log in
+
                           Center(
                             child: GestureDetector(
                               onTap: () {

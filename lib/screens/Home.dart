@@ -121,7 +121,7 @@ class RestaurantHomePage extends StatelessWidget {
     );
   }
 
-  // Method to initialize data fetching once
+
   void _initializeOnce() {
 
     if (_foodController.allFoods.isEmpty && !_foodController.isLoading.value) {

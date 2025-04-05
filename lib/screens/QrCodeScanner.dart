@@ -47,7 +47,7 @@ class BarcodeScannerPage extends StatelessWidget {
             },
           ),
 
-          // Scanning overlay
+
           Center(
             child: Obx(() => Container(
               width: 250,
@@ -62,7 +62,7 @@ class BarcodeScannerPage extends StatelessWidget {
             )),
           ),
 
-          // Status indicator
+
           Positioned(
             bottom: 40,
             left: 0,

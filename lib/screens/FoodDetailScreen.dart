@@ -77,13 +77,13 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Get food details
+
     final String name = widget.food['name'] as String;
     final String category = widget.food['category'] as String;
     final String description = _foodController.getDescription(widget.food);
     final String imageUrl = widget.food['image'] as String? ?? '';
 
-    // Get rating if available, default to 4.8
+
     final double rating = widget.food['rating'] != null ?
     (widget.food['rating'] is int ?
     (widget.food['rating'] as int).toDouble() :
@@ -111,17 +111,17 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Food Image with Rating
+
             FoodImageWidget(imageUrl: imageUrl, rating: rating, ratingCount: ratingCount),
 
-            // Food Name and Price
+
             NamePriceWidget(
                 name: name,
                 category: category,
                 price: _getPriceDisplay()
             ),
 
-            // Description Section
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Column(

@@ -73,7 +73,7 @@ class Login extends StatelessWidget {
 
                 SizedBox(height: screenHeight * 0.03),
 
-                // Email Field
+
                 CustomTextField(
                   controller: emailController,
                   label: "Email",
@@ -84,7 +84,7 @@ class Login extends StatelessWidget {
 
                 SizedBox(height: screenHeight * 0.023),
 
-                // Password Field
+
                 Obx(() => CustomPasswordField(
                   controller: passwordController,
                   label: "Password",
@@ -190,7 +190,7 @@ class Login extends StatelessWidget {
     );
   }
 
-  // Forgot password dialog
+
   void _showForgotPasswordDialog(BuildContext context) {
     final TextEditingController resetEmailController = TextEditingController();
     final formKey = GlobalKey<FormState>();

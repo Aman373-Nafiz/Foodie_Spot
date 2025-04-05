@@ -9,7 +9,7 @@ class ScannerController extends GetxController {
   final MobileScannerController scannerController = MobileScannerController();
   RxBool isScanning = true.obs;
 
-  // Define the expected QR code value here
+
   final String expectedQRValue = "FoodieSpot Test QR Code";
 
   @override
@@ -54,15 +54,15 @@ class ScannerController extends GetxController {
   }
 
   void processQRCode(String code) {
-    // Stop scanning to prevent multiple detections
+
     isScanning.value = false;
 
-    // Check if the scanned code matches the expected value
+
     if (code == expectedQRValue) {
-      // If matched, navigate to splash screen
+
       Get.offAll(() => SplashScreen());
     } else {
-      // If not matched, show error message
+
       Get.snackbar(
         'Invalid QR Code',
         'The scanned QR code does not match the expected value.',
@@ -72,7 +72,7 @@ class ScannerController extends GetxController {
         duration: const Duration(seconds: 3),
       );
 
-      // Resume scanning after a short delay
+
       Future.delayed(const Duration(seconds: 2), () {
         isScanning.value = true;
       });

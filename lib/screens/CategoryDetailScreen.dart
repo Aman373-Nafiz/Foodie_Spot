@@ -49,10 +49,8 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
       ),
       body: Column(
         children: [
-          // Category filter chips
           _buildCategoryFilterChips(),
 
-          // Food items list
           Expanded(
             child: Obx(() {
               final categoryFoods = _foodController.categories[_selectedFilter] ?? [];
