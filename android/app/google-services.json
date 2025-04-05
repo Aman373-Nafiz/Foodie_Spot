@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "558244785517",
+    "project_id": "foodiespot-37039",
+    "storage_bucket": "foodiespot-37039.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558244785517:android:17e8c7282349f55735fe64",
+        "android_client_info": {
+          "package_name": "com.example.foodiespot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEYRCDyk9OQRhJ7Aaf1gXVP6TE-WiQ3Kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
