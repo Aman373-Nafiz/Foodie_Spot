@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-    //options: DefaultFirebaseOptions.currentPlatform, 
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  BarcodeScannerPage(),
+      home:  SplashScreen(),
     );
   }
 }
