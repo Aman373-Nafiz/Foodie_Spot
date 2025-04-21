@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:foodiespot/screens/Login.dart';
 import 'package:foodiespot/screens/Registration.dart';
 import 'controller/AuthController.dart';
+import 'controller/foodController.dart';
 import 'screens/SplashScreen.dart';
 import 'firebase_options.dart';
 
@@ -13,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+   // options: DefaultFirebaseOptions.currentPlatform,
   );
 
 

@@ -14,7 +14,7 @@ class FoodController extends GetxController {
   final RxString searchQuery = ''.obs;
   final RxList<Map<String, dynamic>> searchSuggestions = <Map<String, dynamic>>[].obs;
   final RxBool showSuggestions = false.obs;
-
+  final RxString selectedSize = 'Small'.obs;
 
   final RxBool isLoading = true.obs;
 
@@ -22,6 +22,14 @@ class FoodController extends GetxController {
     onInit();
   }
 
+  var hasSetInitialSize = false;
+
+  void setInitialSizeIfNeeded(List<dynamic>? sizes) {
+    if (!hasSetInitialSize && sizes != null && sizes.isNotEmpty) {
+      selectedSize.value = 'Small'; // or sizes.first
+      hasSetInitialSize = true;
+    }
+  }
   @override
   void onInit() {
     super.onInit();

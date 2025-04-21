@@ -5,6 +5,7 @@ import 'package:foodiespot/screens/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/Login.dart';
+import '../screens/MainScreen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -26,9 +27,8 @@ class AuthController extends GetxController {
     String? savedEmail = prefs.getString('userEmail');
 
     if (isLoggedIn && savedEmail != null) {
-
       firebaseUser.value = _auth.currentUser;
-      Get.to(() => RestaurantHomePage());
+      Get.to(() =>  MainScreen());
     }
   }
 
@@ -36,10 +36,8 @@ class AuthController extends GetxController {
     rememberMe.value = value;
   }
 
-
   Future<void> resetPassword(String email) async {
     try {
-
       if (!GetUtils.isEmail(email)) {
         Get.snackbar(
             "Error",
@@ -94,8 +92,8 @@ class AuthController extends GetxController {
           password: password
       );
 
-
-      await saveUserData(email, fullName);
+      // Also save the user's UID
+      await saveUserData(email, fullName, userCredential.user?.uid);
 
       Get.snackbar(
           "Success",
@@ -105,7 +103,7 @@ class AuthController extends GetxController {
           colorText: Colors.white
       );
 
-      Get.offAll(() => RestaurantHomePage());
+      Get.offAll(() => MainScreen());
     } catch (e) {
       Get.snackbar(
           "Error",
@@ -124,10 +122,10 @@ class AuthController extends GetxController {
           password: password
       );
 
-
       String userName = await getUserNameByEmail(email);
 
-      await saveUserLoginState(email, userName);
+      // Also save the user's UID
+      await saveUserLoginState(email, userName, userCredential.user?.uid);
 
       Get.snackbar(
           "Success",
@@ -137,7 +135,7 @@ class AuthController extends GetxController {
           colorText: Colors.white
       );
 
-      Get.to(() => RestaurantHomePage());
+      Get.to(() => MainScreen());
     } catch (e) {
       Get.snackbar(
           "Error",
@@ -149,17 +147,18 @@ class AuthController extends GetxController {
     }
   }
 
-
-  Future<void> saveUserData(String email, String fullName) async {
+  // Updated to also save UID
+  Future<void> saveUserData(String email, String fullName, String? uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', true);
     await prefs.setString('userEmail', email);
     await prefs.setString('userName', fullName);
-
+    if (uid != null) {
+      await prefs.setString('userUID', uid);
+    }
 
     await prefs.setString('userName_$email', fullName);
   }
-
 
   Future<String> getUserNameByEmail(String email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -168,21 +167,22 @@ class AuthController extends GetxController {
     return name ?? 'User';
   }
 
-
-  Future<void> saveUserLoginState(String email, String name) async {
+  // Updated to also save UID
+  Future<void> saveUserLoginState(String email, String name, String? uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', true);
     await prefs.setString('userEmail', email);
     await prefs.setString('userName', name);
+    if (uid != null) {
+      await prefs.setString('userUID', uid);
+    }
   }
-
 
   Future<String> getUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString('userEmail');
 
     if (email != null) {
-
       String? nameByEmail = prefs.getString('userName_$email');
       if (nameByEmail != null && nameByEmail.isNotEmpty) {
         // If found, update the current userName for consistency
@@ -191,25 +191,27 @@ class AuthController extends GetxController {
       }
     }
 
-
     return prefs.getString('userName') ?? 'User';
   }
-
 
   Future<String> getUserEmail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userEmail') ?? 'user@example.com';
   }
 
+  // New method to get user UID
+  Future<String?> getUserUID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userUID');
+  }
 
   Future<void> clearUserLoginState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
     await prefs.remove('userEmail');
     await prefs.remove('userName');
-
+    await prefs.remove('userUID');
   }
-
 
   Future<void> signOut() async {
     await _auth.signOut();

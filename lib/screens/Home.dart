@@ -27,7 +27,7 @@ class RestaurantHomePage extends StatelessWidget {
       child: Scaffold(
         drawer: buildDrawer(context),
         appBar: AppBar(
-
+            automaticallyImplyLeading:false,
           backgroundColor: const Color(0xFFFF9B43),
           centerTitle: true,
           title: Text(
@@ -429,6 +429,8 @@ class RestaurantHomePage extends StatelessWidget {
         case 'chicken':
           iconData = Icons.fastfood;
           break;
+        case 'asian':
+          iconData = Icons.food_bank;
         default:
           iconData = Icons.restaurant;
       }

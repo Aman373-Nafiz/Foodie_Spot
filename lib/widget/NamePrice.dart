@@ -33,7 +33,7 @@ class NamePriceWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Italian Style ${category.capitalize}',
+                  'Regular ${category.capitalize}',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey.shade600,

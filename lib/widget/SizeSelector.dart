@@ -34,13 +34,13 @@ class SizeSelectorWidget extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              _buildSizeButton('Small', sizes.length > 0 ? sizes[0].toString() : '', selectedSize == 'Small'),
+              _buildSizeButton('6', sizes.length > 0 ? sizes[0].toString() : '', selectedSize == '6'),
               const SizedBox(width: 12),
               if (sizes.length > 1)
-                _buildSizeButton('Medium', sizes[1].toString(), selectedSize == 'Medium'),
+                _buildSizeButton('9', sizes[1].toString(), selectedSize == '9'),
               const SizedBox(width: 12),
               if (sizes.length > 2)
-                _buildSizeButton('Large', sizes[2].toString(), selectedSize == 'Large'),
+                _buildSizeButton('12', sizes[2].toString(), selectedSize == '12'),
             ],
           ),
         ],
